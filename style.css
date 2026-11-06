@@ -116,3 +116,6 @@ body { font-size: 0.9rem; line-height: 1.65; }
 .lead { font-size: 0.95rem; }
 table { font-size: 0.8rem; }
 @media (max-width: 680px) { body { font-size: 0.85rem; } }
+
+/* Crystal mark next to the name */
+h1 .mark { height: 1.5em; width: auto; vertical-align: -0.35em; margin-right: 0.5em; }
