@@ -1,1 +1,0 @@
-# mj-open-labnotes.github.io
