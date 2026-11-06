@@ -101,3 +101,7 @@ nav { font-size: 0.9rem; }
   background: var(--bg);
 }
 .figure .scroll { min-width: 0; }
+
+/* ASCII figures: same width as the text, font size scales down to fit, never below 0.62rem (then the box scrolls) */
+.figure .scroll { max-width: 40rem; container-type: inline-size; }
+.ascii { font-size: clamp(0.62rem, calc((100cqw - 32px) / (var(--cols, 80) * 0.6)), 0.75rem); }
