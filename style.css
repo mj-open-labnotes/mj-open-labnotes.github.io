@@ -136,3 +136,8 @@ table { font-size: 0.92rem; }
 /* Crystal after the name, less elongated */
 h1 .mark { height: 1.3em; width: auto; vertical-align: -0.3em; margin: 0 0 0 0.5em; }
 .prose .scroll { box-sizing: border-box; }
+h1 .mark { height: 1.15em; vertical-align: -0.2em; }
+h1 .mark { height: 1.7em; vertical-align: -0.4em; }
+h1 .mark { height: 1.6em; vertical-align: -0.35em; }
+h1 { font-size: 1.5rem; }
+h1 .mark { height: 1.1em; vertical-align: -0.15em; margin-left: 0.4em; }
