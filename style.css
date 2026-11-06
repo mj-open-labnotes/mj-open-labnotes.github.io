@@ -119,3 +119,20 @@ table { font-size: 0.8rem; }
 
 /* Crystal mark next to the name */
 h1 .mark { height: 1.5em; width: auto; vertical-align: -0.35em; margin-right: 0.5em; }
+
+/* Body text in Calibri-like sans (Carlito is metric-compatible with Calibri) */
+:root { --font-body: 'Calibri', 'Carlito', 'Segoe UI', Arial, sans-serif; }
+body { font-size: 1.06rem; line-height: 1.6; }
+.lead { font-size: 1.1rem; }
+.tagline, .empty { font-size: 0.85rem; }
+table { font-size: 0.92rem; }
+@media (max-width: 680px) { body { font-size: 1rem; } }
+
+/* Tables: same width as the text */
+.prose .scroll { max-width: 40rem; }
+.prose table { min-width: 0; }
+@media (max-width: 680px) { .prose table { min-width: 34rem; } }
+
+/* Crystal after the name, less elongated */
+h1 .mark { height: 1.3em; width: auto; vertical-align: -0.3em; margin: 0 0 0 0.5em; }
+.prose .scroll { box-sizing: border-box; }
