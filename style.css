@@ -3,7 +3,7 @@
   --fg: #000000;
   --muted: #55696a;
   --font-name: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
-  --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-body: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -105,3 +105,14 @@ nav { font-size: 0.9rem; }
 /* ASCII figures: same width as the text, font size scales down to fit, never below 0.62rem (then the box scrolls) */
 .figure .scroll { max-width: 40rem; container-type: inline-size; }
 .ascii { font-size: clamp(0.62rem, calc((100cqw - 32px) / (var(--cols, 80) * 0.6)), 0.75rem); }
+
+/* ASCII figures without frame, aligned with the text */
+.figure .scroll { border: 0; }
+.ascii { padding: 8px 0; font-size: clamp(0.62rem, calc((100cqw - 2px) / (var(--cols, 80) * 0.6)), 0.75rem); }
+
+/* All text in monospace */
+body { font-size: 0.9rem; line-height: 1.65; }
+.tagline, .empty { font-size: 0.85rem; }
+.lead { font-size: 0.95rem; }
+table { font-size: 0.8rem; }
+@media (max-width: 680px) { body { font-size: 0.85rem; } }
