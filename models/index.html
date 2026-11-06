@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,23 +7,174 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,500;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
-<title>Models &amp; hypotheses · Martina Johansson</title>
-<link rel="stylesheet" href="../style.css">
+<title>Psyket som system i lager · Martina Johansson</title>
+<link rel="stylesheet" href="../../style.css">
 </head>
 <body>
-<main class="page">
-  <a class="back" href="../">&larr; Martina Johansson</a>
-  <h1>Models &amp; hypotheses</h1>
-  <ul class="list">
-    <li>
-      <a href="diagnostisk-informationsparadox/">Villkorad medikalisering och den institutionella informationsparadoxen</a>
-      <p class="meta">Sociologisk analysmodell &middot; arbetshypotes v0.1 &middot; 2026-11-06 &middot; på svenska</p>
-    </li>
-    <li>
-      <a href="psyket-som-system/">Psyket som system i lager</a>
-      <p class="meta">Flernivåmodell med observatören i loopen &middot; arbetshypotes v0.2 &middot; 2026-11-06 &middot; på svenska</p>
-    </li>
+<main class="page prose">
+  <a class="back" href="../">&larr; Models &amp; hypotheses</a>
+  <h1>Psyket som system i lager</h1>
+  <p class="tagline">Psyket är ett system i flera lager där påverkan går åt båda håll, och därför kan en reaktion inte bedömas bara utifrån det en observatör ser i situationen.</p>
+  <p class="meta" style="margin-top:14px">Arbetshypotes &middot; v0.4 &middot; 2026-11-06 &middot; hypotetisk, inte validerad</p>
+
+  <h2>Sammanfattning</h2>
+  <p>Modellen beskriver psyket som ett icke-linjärt, dynamiskt flernivåsystem där en individs observerbara respons bestäms av den samlade inre belastningen i samspel med det yttre stimulits styrka. En extern observatör bedömer ofta responsen mot den yttre situationen och saknar insyn i systemets dolda variabler. Hypotesen är att observatörens invalidering återkopplar som ett socialt hot (akut eller kroniskt) och kan förlänga eller cementera dysregleringen.</p>
+  <p>Tre mekanismer bär modellen: tröskelsänkning, hysteres och observatör i loopen. De beskrivs under Mekanismer.</p>
+  <p><strong>Testbar förutsägelse:</strong> samma milda stimulus ger längre återhämtning efter invaliderande än efter validerande respons, även efter kontroll för L1 och L4, och effekten är störst vid hög belastning i L4.</p>
+
+  <figure class="figure" style="margin-top:20px">
+    <div class="scroll" tabindex="0" role="region" aria-label="Schema över modellen, kan rullas i sidled">
+<pre class="ascii" style="--cols:99" role="img" aria-label="Schema över MDRS, det flernivåiga dynamiska responssystemet. Ett yttre stimulus går dels in i individens system med lagren L4, L2 och L1 som leder till den faktiska totala responsen, dels till observatörens modell, som bara registrerar stimulus och synlig respons och jämför med en normativ förväntan. Skillnaden ger en epistemisk diskrepans som leder till tolkningsföreträde och invalidering. Invalideringen går in i L3, ger ett socialt-evaluativt hot och återkopplar till L1, där den förlänger hysteresen och förstärker dysregleringen.">===================================================================================================
+               MDRS: DET FLERNIVÅIGA DYNAMISKA RESPONSSYSTEMET (MED OBSERVATÖR I LOOPEN)
+===================================================================================================
+
+                                 +-------------------------------+
+                                 |    YTTRE STIMULUS / MILJÖ     |
+                                 |            [ E ]              |
+                                 +---------------+---------------+
+                                                 |
+                       +-------------------------+-------------------------+
+                       |                                                   |
+                       v                                                   v
++-------------------------------------------------+     +-----------------------------------------+
+|             INDIVIDENS SYSTEM (S)               |     |       OBSERVATÖRENS MODELL              |
+|                                                 |     |       (Saknar insyn i L1 &amp; L4)          |
+|  +-------------------------------------------+  |     |                                         |
+|  | L4: STRUKTURELL ORGANISATION &amp; HISTORIA   |  |     |  Registrerar enbart:                    |
+|  |     Tidsskala: År till decennier          |  |     |  * Yttre stimulus [ E ]                 |
+|  |     Mått: Allostatisk belastning, ACE     |  |     |  * Synlig respons [ R_obs ]             |
+|  +---------------------+---------------------+  |     |                                         |
+|                        |                        |     |  Genererar normativ förväntan:          |
+|                        | (Tröskelsänkning:      |     |  R_norm = g(E)                          |
+|                        |  sänker aktiverings-   |     +--------------------+--------------------+
+|                        |  tröskel &amp; ökar hot-   |                          |
+|                        |  precision)            |                          | Jämförelse
+|                        v                        |                          v
+|  +-------------------------------------------+  |     +-----------------------------------------+
+|  | L2: PERCEPTION &amp; KOGNITION                |  |     |         EPISTEMISK DISKREPANS           |
+|  |     Tidsskala: Sekunder till dygn         |  |     |  z = (R_obs - R_norm) / SD              |
+|  |     Mått: Prediktionsfel, hotprior, fMRI  |  |     +--------------------+--------------------+
+|  +---------------------+---------------------+  |                          |
+|                        ^                        |                          |
+|                        | (Interoception         |                          | Vid diskrepans:
+|                        |  &amp; kognitivt ältande)  |                          | Tolkningsföreträde &amp;
+|                        v                        |                          | Invalidering
+|  +-------------------------------------------+  |                          |
+|  | L1: NEUROKEMI &amp; FYSIOLOGI                 |  |                          |
+|  |     Tidsskala: Sekunder till dygn         |  |                          |
+|  |     Mått: HPA (kortisol), ANS (HRV), CRP  |  |                          |
+|  +---------------------+---------------------+  |                          |
+|                        |                        |                          |
+|                        | (Hysteres:             |                          |
+|                        |  fördröjd återgång)    |                          |
+|                        v                        |                          |
+|  +-------------------------------------------+  |                          |
+|  | FAKTISK TOTAL RESPONS                     |  |                          |
+|  | R_obs = f(L1, L2, L3, L4, E)              +--+-------------------------&gt;+
+|  +---------------------+---------------------+  |    (Observeras)          |
+|                        ^                        |                          |
+|                        |                        |                          |
++------------------------|------------------------+                          |
+                         |                                                   |
+                         +---------------------------------------------------+
+                                                  |
+                                                  | [ Återkoppling: Invalidering ]
+                                                  v
+                               +-------------------------------------+
+                               | L3: RELATION &amp; SOCIAL SPEGLING      |
+                               |     Tidsskala: Dagar till månader   |
+                               |     Mått: Social smärta, evaluering |
+                               +------------------+------------------+
+                                                  |
+                                                  | Social-evaluativt hot
+                                                  | (Aktiverar HPA/ANS)
+                                                  v
+                               +-------------------------------------+
+                               | L1: ÅTERKOPPLING TILL FYSIOLOGI     |
+                               |     Förlänger hysteres och          |
+                               |     förstärker dysreglering         |
+                               +-------------------------------------+</pre>
+    </div>
+    <figcaption>Figur 1. Individens system (L4, L2, L1) ger den faktiska responsen. Observatörens modell ser bara stimulus och respons och jämför dem med en normativ förväntan. Vid diskrepans blir bedömningen en invalidering som går in i L3 och återkopplar som socialt hot till L1.</figcaption>
+  </figure>
+
+  <h2>Utgångspunkt</h2>
+  <p>Modellen bygger på den biopsykosociala modellen (Engel, 1977): biologiska, psykologiska och sociala nivåer påverkar varandra och bör förstås tillsammans. Lagren motsvarar grovt dessa nivåer. L1 är det biologiska och fysiologiska, L2 det psykologiska, L3 det relationella och sociala, och L4 historia och struktur, som spänner över flera nivåer.</p>
+  <p>Modellen lägger till fyra saker. Lagren har olika tidsskalor. Påverkan går åt båda håll och sprids först när en tröskel nås. Den observerbara responsen beror på den samlade belastningen och inte bara på situationen. Och observatörens bedömning är en del av systemet, vilket ger den testbara förutsägelsen. Kritiken mot den biopsykosociala modellen är att den ofta blir en lista över faktorer utan mekanismer. Här är avsikten att ange mekanismer och tröskelvillkor, se Mekanismer.</p>
+
+  <h2>Lagren</h2>
+  <p>Farmakologi, miljö, relationer, social roll och social spegling påverkar hela den psykologiska organisationen på biologisk, fysiologisk, kemisk och psykologisk nivå samtidigt. Därifrån genereras de kognitiva, emotionella, existentiella och perceptuella effekter och uttryck som utgör patologi eller tillfrisknande. De upplevs subjektivt och blir samtidigt bedömbara utifrån.</p>
+  <p>Modellen har fyra lager. L1 (neurokemi och fysiologi) och L2 (perception och kognition) är snabba och förändras på sekunder till dygn. L3 (relation och social spegling) är långsammare och förändras på dagar till månader. L4 (strukturell organisation och historia) är långsammast och förändras på år till decennier. Lagren är inte oberoende: en förändring i ett lager sprider sig till de andra, men inte linjärt. Överföringen sker först när en tröskel nås. Farmakologi kommer utifrån och verkar främst direkt i L1, men effekterna sprids till de andra lagren.</p>
+
+  <h2>Åt andra hållet</h2>
+  <p>Modellen går även åt andra hållet, och det är där förståelsen ofta brister, i vården och i allmänhet. Ett emotionellt uttryck förstås som en reaktion och bedöms utifrån rationalitet. Andra människor har tolkningsföreträde och avgör om personens emotionella respons matchar situationen och miljön den uppstod i. Responsens rimlighet jämförs då i fel sammanhang.</p>
+  <p>Människor reagerar inte på det som syns för en utomstående betraktare. De reagerar på situationen så som den träffar hela deras system: historia, kroppstillstånd, relationer och roll. Situation, reaktion och respons följer på varandra, men allt fortplantar sig inåt med mycket större magnitud än de flesta verkar kunna föreställa sig. Det som ser oproportionerligt ut utifrån kan vara fullt proportionerligt inifrån.</p>
+
+  <h2>Eko och komposition</h2>
+  <p>En reaktion eller respons kan dels vara ett eko från barndomen, dels en effekt av hur övriga lager är sammansatta, hur de fungerar och var de brister. Samma sak gäller kognition och perception: den inre biologin, kemin, fysiologin och psykologin påverkar tankeinnehåll, tolkningar och förmåga, och hur detta kopplar vidare till de sociala och emotionella lagren i personligheten och till relationerna utanför personen.</p>
+
+  <h2>Neurovetenskaplig kartläggning (preliminär)</h2>
+  <p>Modellen kan kopplas till affektiv och social neurovetenskap och till beräkningspsykiatri. Kartläggningen nedan är en hypotes, inte en kontrollerad litteraturgenomgång, och kretsarna återkommer i flera lager.</p>
+  <div class="scroll" tabindex="0" role="region" aria-label="Kartläggning av lagren mot neurovetenskapliga kretsar, kan rullas i sidled">
+    <table>
+      <thead><tr><th>Lager</th><th>Kretsar och system</th><th>Beräkningsbegrepp</th><th>Mätbart</th></tr></thead>
+      <tbody>
+        <tr><td>L1 Neurokemi och fysiologi</td><td>HPA-axeln, locus coeruleus&ndash;noradrenalin, mesolimbiskt dopamin, autonoma nervsystemet, inflammation</td><td>Gain (förstärkning) och precisionsviktning</td><td>Kortisol (dygnskurva), hjärtfrekvensvariabilitet, CRP/IL-6, pupillometri, sömn</td></tr>
+        <tr><td>L2 Perception och kognition</td><td>Amygdala, främre insula och dorsala främre cingulum (salience-nätverket), vmPFC och dlPFC som reglering</td><td>Priors, prediktionsfel, inlärningstakt och beslutströskel</td><td>fMRI, uppgifter som reversal learning och beads task, EEG (mismatch negativity)</td></tr>
+        <tr><td>L3 Relation och social spegling</td><td>Främre insula och dorsala främre cingulum vid social smärta (omtvistat), mPFC och TPJ (mentalisering), ventrala striatum (social belöning)</td><td>Sociala prediktionsfel</td><td>Trier Social Stress Test, manipulation av validering och invalidering, fysiologisk synkroni</td></tr>
+        <tr><td>L4 Struktur och historia</td><td>Hippocampus, amygdala&ndash;prefrontal koppling, glukokortikoidreceptorn (NR3C1) och dess epigenetik (omstridd)</td><td>Långsamma priors och startvärden</td><td>Strukturell MRI, allostatisk belastning, ACE-skattning</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:12px">Två varningar gäller kartläggningen. Att en region aktiveras visar inte vilket psykologiskt tillstånd som ligger bakom (omvänd inferens). Och L3 och L4 är svårast att operationalisera, eftersom de oftare mäts med skattningar och intervjuer än med neurala mått.</p>
+
+  <h2>Mekanismer</h2>
+  <p>Tre mekanismer gör att modellen skiljer sig från att bara säga att allt påverkar allt. De är hypoteser och ännu inte formaliserade i en ekvation.</p>
+  <ol>
+    <li><strong>Tröskelsänkning.</strong> Hög belastning i L4 ökar amygdalareaktiviteten och försvagar prefrontal reglering. Beräkningsmässigt är det en hög precision på hotprior, så att tvetydiga intryck lättare tolkas som hot och tröskeln för aktivering i L1 sjunker.</li>
+    <li><strong>Hysteres.</strong> Stressaxens negativa återkoppling fungerar sämre efter långvarig belastning, och grubbel och ältande förlänger den fysiologiska stressen. Återhämtningen beror därför inte enbart på hur länge stimulit varade.</li>
+    <li><strong>Observatör i loopen.</strong> Social evaluerande hot ger kraftigare stressrespons än många andra stressorer, medan socialt stöd dämpar hotkretsarna (social buffring). Hypotesen är att en invaliderande bedömning verkar som sådant hot, så att bedömningen blir en del av systemet och inte bara en mätare av det.</li>
+  </ol>
+  <p>Den tredje mekanismen är modellens särdrag och ger en testbar förutsägelse (se nedan). En ren intraindividuell modell förutsäger ingen skillnad mellan invaliderande och validerande respons. Observatörens &rdquo;fel&rdquo; kan beskrivas som att observatörens modell saknar de latenta tillstånden L1 och L4 och bara utgår från den yttre situationen.</p>
+
+  <h2>Testbar förutsägelse och falsifierbarhet</h2>
+  <p><strong>Förutsägelse.</strong> Efter ett standardiserat milt stimulus blir återhämtningstiden för HPA-axeln och amygdala längre vid en invaliderande observatörsrespons än vid en validerande. L1 och L4 kan inte hållas konstanta, så de matchas eller kontrolleras statistiskt. Effekten förutsägs vara störst vid hög belastning i L4.</p>
+  <p><strong>Falsifiering.</strong></p>
+  <ul>
+    <li>Ange i förväg en minsta effekt av intresse. Ligger effekten av validering mot invalidering tydligt inom det intervallet (ett ekvivalenstest med tillräcklig styrka) faller den tredje mekanismen.</li>
+    <li>Uteblir interaktionen med belastning i L4 faller den delen av förutsägelsen.</li>
+    <li>Mekanism 1 och 2 faller inte med detta. De förutsägs också av diatesstress- och sensitiseringsmodeller och skiljer därför inte modellen från dem.</li>
   </ul>
+  <p><strong>Mått på diskrepansen.</strong> Skillnaden mellan observerad och förväntad respons mäts som en standardiserad avvikelse (z-poäng) från en normativ modell, inte som ett absolutbelopp, så att riktningen (över- eller underreaktion) bevaras.</p>
+
+  <h2>Gränser och släktskap</h2>
+  <p>Att en reaktion är begriplig utifrån systemet betyder inte att tolkningen den bygger på stämmer. Modellen säger att en reaktion har en förklaring, inte att varje uppfattning om världen är korrekt. En utomstående kan fortfarande bidra, till exempel med verklighetsprövning, men utomståendes syn räcker inte som mått på om en reaktion är rimlig.</p>
+  <p>Besläktade idéer finns hos Linehan (emotionell sårbarhet i en invaliderande miljö), Hochschild (&rdquo;feeling rules&rdquo;) och Fricker (epistemic injustice). Jag har inte kontrollerat referenserna mot originaltexterna.</p>
+  <p>Modellen är en syntes. Det som kan vara särpräglat är kombinationen: observatörens bedömning ses som en modell som saknar personens dolda lager, och bedömningen återkopplar in i personens system.</p>
+  <div class="scroll" tabindex="0" role="region" aria-label="Jämförelse med andra perspektiv, kan rullas i sidled">
+    <table style="min-width:36rem">
+      <thead><tr><th>Perspektiv</th><th>Överlappar med modellen</th><th>Saknar</th></tr></thead>
+      <tbody>
+        <tr><td>Diatesstress</td><td>Sårbarhet &times; stress förklarar reaktivitet (L1, L4)</td><td>Omgivningens bedömning som del av systemet</td></tr>
+        <tr><td>Linehans biosociala teori</td><td>Invaliderande miljö förstärker emotionell sårbarhet</td><td>Observatörens modellfel, tröskel och tidsskalor, neurala led</td></tr>
+        <tr><td>Epistemic injustice (Fricker, Kidd och Carel)</td><td>Personen får lägre trovärdighet och andra har tolkningsföreträde</td><td>Fysiologiska och beräkningsmässiga följder</td></tr>
+        <tr><td>Nätverks- och flerskalemodeller (Borsboom m.fl.)</td><td>Tidsskalor, återkoppling och hysteres</td><td>Observatör och social bedömning som variabel</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Versionshistorik</h2>
+  <div class="scroll" tabindex="0" role="region" aria-label="Versionshistorik">
+    <table style="min-width:24rem">
+      <thead><tr><th>Version</th><th>Datum</th><th>Ändring</th></tr></thead>
+      <tbody>
+        <tr><td>v0.1</td><td>2026-11-06</td><td>Första version.</td></tr>
+        <tr><td>v0.2</td><td>2026-11-06</td><td>Tidsskalan för L1 gjord lika i text och figur (sekunder till dygn). Mekanismerna står bara under Mekanismer. Ny figurtext.</td></tr>
+        <tr><td>v0.3</td><td>2026-11-06</td><td>Avsnittet Utgångspunkt tillagt: koppling till den biopsykosociala modellen och vad modellen lägger till.</td></tr>
+        <tr><td>v0.4</td><td>2026-11-06</td><td>En mening om farmakologi tillagd under Lagren.</td></tr>
+      </tbody>
+    </table>
+  </div>
 </main>
 </body>
 </html>
