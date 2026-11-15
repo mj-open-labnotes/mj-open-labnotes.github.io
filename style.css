@@ -141,3 +141,34 @@ h1 .mark { height: 1.7em; vertical-align: -0.4em; }
 h1 .mark { height: 1.6em; vertical-align: -0.35em; }
 h1 { font-size: 1.5rem; }
 h1 .mark { height: 1.1em; vertical-align: -0.15em; margin-left: 0.4em; }
+
+/* Always black, white text */
+:root, :root:not([data-theme="light"]) { --bg: #000000; --fg: #ffffff; --muted: #94a9aa; color-scheme: dark; }
+html, body { background: #000; color: #fff; }
+
+/* Larger name and tagline (1.5x), octahedron before the tagline */
+h1 { font-size: 2.25rem; margin-bottom: 10px; }
+.tagrow { display: flex; align-items: center; gap: 16px; }
+.tagrow canvas { width: 4.5rem; height: 4.5rem; flex: none; }
+.tagline, .empty { font-size: 1.275rem; line-height: 1.4; }
+nav { font-size: 1.35rem; }
+@media (max-width: 680px) { h1 { font-size: 1.7rem; } .tagline { font-size: 1.05rem; } nav { font-size: 1.05rem; } .tagrow canvas { width: 3.5rem; height: 3.5rem; } }
+.tagrow canvas { width: 5.5rem; height: 5.5rem; }
+nav { font-size: 1.1rem; }
+@media (max-width: 680px) { .tagrow canvas { width: 4rem; height: 4rem; } nav { font-size: 1rem; } }
+.prose figure + p, .prose .scroll + p { margin-top: 14px; }
+
+/* Status labels and latest-notes feed */
+.status { font-family: var(--font-name); font-size: 0.8em; border: 1px solid var(--muted); border-radius: 3px; padding: 0 5px; color: var(--fg); white-space: nowrap; }
+.legend { font-size: 0.92rem; color: var(--muted); max-width: 40rem; }
+.legend .status { color: var(--muted); }
+.feed { margin-top: 36px; max-width: 40rem; }
+.feed h2 { font-family: var(--font-name); font-size: 0.95rem; font-weight: 500; color: var(--muted); margin: 0 0 8px; }
+.feed ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.feed li { display: grid; grid-template-columns: 6.2rem 1fr auto; gap: 12px; align-items: baseline; }
+.feed time, .feed .v { font-family: var(--font-name); font-size: 0.82rem; color: var(--muted); }
+@media (max-width: 680px) { .feed li { grid-template-columns: 1fr auto; } .feed time { grid-column: 1 / -1; } }
+
+/* crystal strip */
+.crystals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:28px 0 0;max-width:520px}
+.crystals img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
