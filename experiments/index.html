@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,14 +7,284 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,500;0,700;1,400&family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<title>Experiments &amp; visualizations · Martina Johansson</title>
-<link rel="stylesheet" href="../style.css">
+<title>Omstarter, frekvens och kostnad · Martina Johansson</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+.sim { max-width: 40rem; margin: 8px 0 18px; }
+.sim fieldset { border: 1px solid var(--muted); margin: 0 0 14px; padding: 10px 14px 4px; }
+.sim legend { font-family: var(--font-name); font-size: 0.8rem; padding: 0 6px; color: var(--muted); }
+.sim .row { display: grid; grid-template-columns: 1fr 4.5rem; gap: 2px 10px; align-items: center; margin: 0 0 10px; }
+.sim .row label { font-size: 0.9rem; grid-column: 1 / 2; }
+.sim .row output { font-family: var(--font-name); font-size: 0.85rem; text-align: right; grid-column: 2 / 3; grid-row: 1; }
+.sim .row input[type=range] { grid-column: 1 / 3; width: 100%; accent-color: var(--fg); margin: 0; }
+.sim .presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.sim button { font-family: var(--font-name); font-size: 0.8rem; color: var(--fg); background: transparent; border: 1px solid var(--muted); border-radius: 3px; padding: 4px 10px; cursor: pointer; }
+.sim button:hover { border-color: var(--fg); }
+.sim button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.cells { display: grid; grid-template-columns: 7rem 1fr 1fr; gap: 6px; font-family: var(--font-name); font-size: 0.8rem; max-width: 40rem; align-items: stretch; }
+.cells .h { color: var(--muted); align-self: end; padding-bottom: 2px; }
+.cells .cell { border: 1px solid var(--muted); padding: 8px 10px; position: relative; min-height: 3.2rem; }
+.cells .cell b { font-size: 1.05rem; display: block; }
+.cells .bar { position: absolute; left: 0; bottom: 0; height: 4px; background: var(--fg); }
+.cells .cell.both { border-color: var(--fg); }
+#map { display:block; width:100%; max-width:40rem; height:auto; border:1px solid var(--muted); cursor:crosshair; margin:0 0 4px; }
+#map:focus-visible { outline:2px solid var(--fg); outline-offset:2px; }
+.sim button[aria-pressed=true] { border-color: var(--fg); }
+.cells + .verdict { margin-top: 18px; }
+.verdict { font-family: var(--font-name); font-size: 0.85rem; margin: 14px 0 4px; max-width: 40rem; }
+.verdict strong { font-weight: 700; }
+.note { font-size: 0.85rem; color: var(--muted); max-width: 40rem; margin: 0 0 12px; }
+@media (max-width: 480px) { .cells { grid-template-columns: 4.6rem 1fr 1fr; font-size: 0.72rem; } }
+</style>
 </head>
 <body>
-<main class="page">
-  <a class="back" href="../">&larr; Martina Johansson</a>
-  <h1>Experiments &amp; visualizations</h1>
-  <p class="empty">Nothing here yet.</p>
+<main class="page prose">
+  <a class="back" href="../">&larr; Experiments &amp; visualizations</a>
+  <h1>Omstarter, frekvens och kostnad</h1>
+  <p class="tagline">Kan två måttliga begränsningar göra mer skada tillsammans än var för sig? Här är en modell man kan dra i.</p>
+  <p class="meta" style="margin-top:14px"><span class="status">hypotes</span> &middot; modell och simulering &middot; v0.2 &middot; 2026-11-16 &middot; inga egna mätdata, bara en modell</p>
+
+  <h2>Det som väcker min nyfikenhet</h2>
+  <p>Vissa uppgifter går inte att göra i bitar. De kräver att man kommer in i dem, och det kostar tid varje gång man tappar tråden. Om något avbryter, eller om man tappar tråden av sig själv, måste man börja om. Det jag undrar över är vad som händer när två sådana saker finns samtidigt: en som bestämmer <em>hur ofta</em> man måste starta om, och en som bestämmer <em>vad varje omstart kostar</em>.</p>
+  <p>Frekvensen kan komma från olika håll: att arbetsminnet faller sönder, att andra avbryter, eller att man vet att någon tittar. Kostnaden är individuell och kan skilja sig mycket mellan människor och mellan uppgifter.</p>
+
+  <h2>Hur jag har undersökt det</h2>
+  <p>Jag har byggt den enklaste modell jag kunde som fångar idén, så att jag kan se var den håller och var den inte gör det. En uppgift kräver <em>W</em> minuters ostört arbete och ska vara klar inom <em>L</em> minuter. Avbrotten kommer slumpmässigt med en viss frekvens per timme. Efter varje avbrott går de första <em>c</em> minuterna åt till att komma igång igen, och bara resten räknas som arbete. Modellen körs 600 gånger för varje punkt på kartan, och varje punkt visar hur ofta uppgiften inte blir klar i tid.</p>
+  <p>Två faktorer varieras: hur ofta man måste starta om och vad en omstart kostar. Kartan nedan visar, för varje kombination av hög frekvens och hög kostnad, om utfallet är större än summan av de två enskilda tilläggen jämfört med utgångsläget (låg frekvens, låg kostnad). Frekvensen är en sammanlagd siffra. I verkligheten kan den komma från tre håll: att man själv tappar tråden, att andra avbryter och att man vet att någon tittar. Det delas inte upp här.</p>
+
+  <h2>Prova själv</h2>
+  <p class="note" style="margin-bottom:10px"><strong>Alla värden här är illustrationer.</strong> De är inte mätta och inte hämtade ur litteraturen. Det som går att läsa av är kartans <em>form</em>, inte enskilda siffror.</p>
+  <div class="sim" id="sim">
+    <div class="presets" role="group" aria-label="Exempelinställningar">
+      <button type="button" data-p="std">Grundexempel</button>
+      <button type="button" data-p="floor">Golveffekt</button>
+      <button type="button" data-p="ceil">Takeffekt</button>
+      <button type="button" data-p="thr">Tröskeleffekt</button>
+    </div>
+    <fieldset>
+      <legend>Utgångsläget (låg frekvens, låg kostnad)</legend>
+      <div class="row"><label for="fl">Omstarter per timme</label><output id="o_fl"></output><input id="fl" type="range" min="0" max="5" step="0.5" value="1"></div>
+      <div class="row"><label for="cl">Kostnad per omstart (minuter)</label><output id="o_cl"></output><input id="cl" type="range" min="0" max="20" step="1" value="3"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Uppgiften</legend>
+      <div class="row"><label for="W">Arbete som krävs (minuter)</label><output id="o_W"></output><input id="W" type="range" min="30" max="300" step="10" value="120"></div>
+      <div class="row"><label for="L">Tid som finns (minuter)</label><output id="o_L"></output><input id="L" type="range" min="60" max="600" step="10" value="300"></div>
+      <div class="row"><label for="m">Minsta obrutna sträcka som behövs för att något ska räknas (minuter)</label><output id="o_m"></output><input id="m" type="range" min="0" max="60" step="5" value="0"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Hur vanligt är det (för medelvärdet nedan)</legend>
+      <div class="row"><label for="q">Andel med hög återstartskostnad (procent)</label><output id="o_q"></output><input id="q" type="range" min="0" max="50" step="5" value="10"></div>
+    </fieldset>
+    <div class="presets" role="group" aria-label="Vad kartan visar">
+      <button type="button" data-mode="int" aria-pressed="true">Visa interaktion</button>
+      <button type="button" data-mode="risk" aria-pressed="false">Visa risk att inte bli klar</button>
+    </div>
+    <canvas id="map" tabindex="0" role="img" aria-label="Karta över frekvens och omstartskostnad. Välj en punkt med klick eller piltangenter."></canvas>
+    <p class="note" id="legend" style="margin-top:6px"></p>
+    <div class="cells" aria-live="polite">
+      <div></div><div class="h">Låg kostnad</div><div class="h" id="hc">Hög kostnad</div>
+      <div class="h">Låg frekvens</div>
+      <div class="cell"><b id="p00"></b><span>blir inte klar</span><i class="bar" id="b00"></i></div>
+      <div class="cell"><b id="p01"></b><span>blir inte klar</span><i class="bar" id="b01"></i></div>
+      <div class="h" id="hf">Hög frekvens</div>
+      <div class="cell"><b id="p10"></b><span>blir inte klar</span><i class="bar" id="b10"></i></div>
+      <div class="cell both"><b id="p11"></b><span>blir inte klar</span><i class="bar" id="b11"></i></div>
+    </div>
+    <p class="verdict" id="verdict" aria-live="polite"></p>
+    <p class="note" id="detail"></p>
+    <h3>Medelvärde och undergrupp</h3>
+    <p class="note">Samma punkt på kartan, men nu som en grupp där en andel har den höga kostnaden och resten den låga.</p>
+    <div class="scroll" tabindex="0" role="region" aria-label="Medelvärde och undergrupp, kan rullas i sidled">
+      <table id="pop">
+        <thead><tr><th>Grupp</th><th>Låg frekvens</th><th>Hög frekvens</th><th>Ökning</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="verdict" id="popverdict" aria-live="polite"></p>
+  </div>
+
+  <h2>Vad jag har kommit fram till</h2>
+  <p>Ingenting om människor, eftersom modellen inte bygger på några mätdata. Det modellen visar är hur hypotesen beter sig:</p>
+  <ul>
+    <li>När varken frekvens eller kostnad ensam är tillräcklig för att göra uppgiften omöjlig, men båda tillsammans är det, blir utfallet <strong>superadditivt</strong>: den gemensamma rutan är större än summan av de två enskilda tilläggen. Det är grundexemplet.</li>
+    <li>Det beror på att tidsförlusten är frekvens &times; kostnad. Mekanismen är alltså <strong>multiplikativ genom konstruktion</strong>, och att utfallet blir superadditivt är därför ingen upptäckt. Det intressanta är om verkliga data följer den vägen, och det kan bara visas genom att mäta antalet omstarter.</li>
+    <li><strong>Golv och tak.</strong> Om uppgiften är så lätt att ingen ruta når nämnvärd risk, eller så svår att alla gör det, försvinner interaktionen. Den finns kvar i verkligheten men går inte att se. Därför måste uppgiftens svårighet kalibreras i ett riktigt försök.</li>
+    <li><strong>Tröskel.</strong> Om arbetet kräver en obruten sträcka av en viss längd, ger en uppdelad dag mycket mindre än bara förlorad tid, eftersom sträckor som är för korta inte räknas alls. Det är ett annat skäl till att små avbrott kan kosta mycket, och det går att skilja från den enkla frekvens &times; kostnad.</li>
+  </ul>
+  <p><strong>Hypotesen förkastas om</strong> utfallet i ett kalibrerat försök är additivt eller subadditivt, eller om en enda begränsning förklarar hela nedgången.</p>
+
+  <h2>Vad som talar emot</h2>
+  <ul>
+    <li><strong>Mekanismen är multiplikativ i förväg.</strong> Modellen kan därför inte pröva hypotesen. Den visar bara vad hypotesen innebär.</li>
+    <li><strong>En enda dominerande begränsning.</strong> Tidigare forskning om kumulativ risk har haft svårt att utesluta att en enda risk driver hela effekten. Det måste mötas innan något kan påstås.</li>
+    <li><strong>Frekvens och kostnad är inte oberoende i verkligheten.</strong> Den som blir avbruten ofta kan lära sig att starta om billigare, eller sluta försöka komma in alls. Modellen antar att de är fristående.</li>
+    <li><strong>Fysisk eller social störning.</strong> Att någon tittar kan höja felfrekvensen genom skam, genom belastning på arbetsminnet eller för att personen rör sig och är en sensorisk störning. De går inte att skilja i modellen.</li>
+    <li><strong>Även en påvisad interaktion</strong> är ingen biologisk eller psykologisk samverkan. Den säger bara att effekten är större än summan.</li>
+  </ul>
+
+  <h2>Gränser och öppna frågor</h2>
+  <ul>
+    <li><strong>Inte läst i full text.</strong> Idén om samverkan mellan orsaker (Rothman, formaliserad av VanderWeele) och forskningen om avbrott och återupptagande (Trafton m.fl.) är jag bekant med, men jag har inte läst dem noga för den här sidan. Några siffror ur litteraturen om kumulativ risk finns inte med eftersom jag inte har kontrollerat dem.</li>
+    <li><strong>Novitet.</strong> Jag har inte hittat någon text som sätter den här mekanismen på kognitiv kapacitet med en uppgift man kan mäta, men sökningen är kort och inte systematisk.</li>
+    <li><strong>Mätbarhet.</strong> Ett riktigt försök behöver en tvåfaktoriell design, kalibrerad uppgiftssvårighet och ett mått på antalet omstarter. Det kan jag inte genomföra själv.</li>
+    <li>Sidan säger inget om någon enskild person och ger inga råd.</li>
+  </ul>
+
+  <h2>Hur sidan kom till</h2>
+  <p>Frågan och iakttagelserna bakom den är mina. Mekanismen och modellens form utvecklades i samtal med en AI och har inte kontrollerats mot data.</p>
+
+  <h2>Versionshistorik</h2>
+  <div class="scroll" tabindex="0" role="region" aria-label="Versionshistorik">
+    <table>
+      <thead><tr><th>Version</th><th>Datum</th><th>Ändring</th></tr></thead>
+      <tbody>
+        <tr><td>v0.2</td><td>2026-11-16</td><td>Reglage för andel med hög återstartskostnad och tabell över medelvärde och undergrupp. Texten under reglagen är oförändrad från v0.1.</td></tr>
+        <tr><td>v0.1</td><td>2026-11-16</td><td>Första version: karta över frekvens och omstartskostnad, tidsgräns och tröskel.</td></tr>
+      </tbody>
+    </table>
+  </div>
 </main>
+<script>
+(function () {
+  function rng(seed){var s=seed>>>0;return function(){s=(s+0x6D2B79F5)>>>0;var t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
+  function pFail(lam, c, W, L, m, N) {
+    var r = rng(12345), f = 0;
+    for (var i = 0; i < N; i++) {
+      var t = 0, out = 0;
+      while (t < L && out < W) {
+        var s = lam > 0 ? -Math.log(1 - r()) * 60 / lam : 1e9;
+        var len = Math.min(s, L - t), eff = len - c;
+        if (eff > 0 && eff >= m) out += eff;
+        t += len;
+      }
+      if (out < W) f++;
+    }
+    return f / N;
+  }
+  var FMAX = 10, CMAX = 40, GX = 24, GY = 20, NG = 600, NP = 3000;
+  var ids = ['fl','cl','W','L','m','q'], el = {};
+  ids.forEach(function (i) { el[i] = document.getElementById(i); });
+  function v(i) { return parseFloat(el[i].value); }
+  var cv = document.getElementById('map'), ctx = cv.getContext('2d');
+  var grid = null, mode = 'int', sel = null;
+  var M = { l: 46, r: 10, t: 10, b: 38 };
+  function css(n) { return getComputedStyle(document.body).getPropertyValue(n).trim() || '#888'; }
+  function fAt(i) { return v('fl') + (FMAX - v('fl')) * i / (GX - 1); }
+  function cAt(j) { return v('cl') + (CMAX - v('cl')) * j / (GY - 1); }
+  function compute() {
+    var W = v('W'), L = v('L'), m = v('m'), p = [];
+    for (var i = 0; i < GX; i++) { p.push([]); for (var j = 0; j < GY; j++) p[i].push(pFail(fAt(i), cAt(j), W, L, m, NG)); }
+    grid = p;
+    if (!sel) sel = { i: Math.round((4 - v('fl')) / (FMAX - v('fl')) * (GX - 1)), j: Math.round((12 - v('cl')) / (CMAX - v('cl')) * (GY - 1)) };
+    sel.i = Math.max(1, Math.min(GX - 1, sel.i)); sel.j = Math.max(1, Math.min(GY - 1, sel.j));
+  }
+  function inter(i, j) { return (grid[i][j] - grid[i][0] - grid[0][j] + grid[0][0]) * 100; }
+  function size() {
+    var w = cv.clientWidth || 600, h = Math.round(w * 0.68), d = Math.min(window.devicePixelRatio || 1, 3);
+    cv.width = w * d; cv.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0); return [w, h];
+  }
+  function mix(a, b, t) { return Math.round(a + (b - a) * t); }
+  function draw() {
+    var wh = size(), w = wh[0], h = wh[1], fg = css('--fg'), muted = css('--muted'), bg = css('--bg');
+    var dark = bg === '#000000' || bg === 'black';
+    ctx.clearRect(0, 0, w, h);
+    var pw = w - M.l - M.r, ph = h - M.t - M.b, cw = pw / GX, ch = ph / GY;
+    for (var i = 0; i < GX; i++) for (var j = 0; j < GY; j++) {
+      var col;
+      if (mode === 'risk') { var q = grid[i][j]; col = dark ? 'rgb(' + mix(0,255,q) + ',' + mix(0,255,q) + ',' + mix(0,255,q) + ')' : 'rgb(' + mix(255,0,q) + ',' + mix(255,0,q) + ',' + mix(255,0,q) + ')'; }
+      else { var x = Math.max(-60, Math.min(60, inter(i, j))) / 60, a = Math.abs(x);
+        if (x >= 0) col = dark ? 'rgb(' + mix(0,255,a) + ',' + mix(0,150,a) + ',' + mix(0,40,a) + ')' : 'rgb(' + mix(255,220,a) + ',' + mix(255,90,a) + ',' + mix(255,0,a) + ')';
+        else col = dark ? 'rgb(' + mix(0,70,a) + ',' + mix(0,150,a) + ',' + mix(0,255,a) + ')' : 'rgb(' + mix(255,20,a) + ',' + mix(255,110,a) + ',' + mix(255,230,a) + ')'; }
+      ctx.fillStyle = col; ctx.fillRect(M.l + i * cw, M.t + (GY - 1 - j) * ch, cw + 0.5, ch + 0.5);
+    }
+    ctx.strokeStyle = muted; ctx.lineWidth = 1; ctx.strokeRect(M.l, M.t, pw, ph);
+    ctx.fillStyle = muted; ctx.font = '11px JetBrains Mono, monospace'; ctx.textAlign = 'center';
+    [0, 0.25, 0.5, 0.75, 1].forEach(function (u) {
+      var x = M.l + u * (pw - cw) + cw / 2; ctx.fillText((v('fl') + (FMAX - v('fl')) * u).toFixed(1), x, h - M.b + 14);
+      var y = M.t + (1 - u) * (ph - ch) + ch / 2; ctx.textAlign = 'right'; ctx.fillText(Math.round(v('cl') + (CMAX - v('cl')) * u), M.l - 6, y + 4); ctx.textAlign = 'center';
+    });
+    ctx.fillText('omstarter per timme (hög frekvens)', M.l + pw / 2, h - 6);
+    ctx.save(); ctx.translate(11, M.t + ph / 2); ctx.rotate(-Math.PI / 2); ctx.fillText('minuter per omstart (hög kostnad)', 0, 0); ctx.restore();
+    if (sel) { ctx.strokeStyle = fg; ctx.lineWidth = 2; ctx.strokeRect(M.l + sel.i * cw + 1, M.t + (GY - 1 - sel.j) * ch + 1, cw - 2, ch - 2); }
+  }
+  function pct(x) { return Math.round(x * 100) + ' %'; }
+  function sgn(x) { return (x > 0 ? '+' : x < 0 ? '\u2212' : '') + Math.abs(x).toFixed(0); }
+  function readout() {
+    document.getElementById('legend').textContent = mode === 'int'
+      ? 'Färg = interaktion i procentenheter: orange är superadditivt, blått är subadditivt, vitt/svart är ungefär additivt. Klicka på kartan för att välja en punkt.'
+      : 'Färg = andel som inte blir klara i tid, från 0 % (tomt) till 100 % (fullt). Klicka på kartan för att välja en punkt.';
+    var f = fAt(sel.i), c = cAt(sel.j);
+    var p00 = grid[0][0], p10 = grid[sel.i][0], p01 = grid[0][sel.j], p11 = grid[sel.i][sel.j];
+    document.getElementById('hc').textContent = 'Hög kostnad (' + c.toFixed(0) + ' min)';
+    document.getElementById('hf').textContent = 'Hög frekvens (' + f.toFixed(1) + ' per tim)';
+    [['00',p00],['10',p10],['01',p01],['11',p11]].forEach(function (a) {
+      document.getElementById('p' + a[0]).textContent = pct(a[1]);
+      document.getElementById('b' + a[0]).style.width = (a[1] * 100) + '%';
+    });
+    var I = (p11 - p10 - p01 + p00) * 100, add = (p10 + p01 - p00) * 100, all = [p00, p10, p01, p11], t;
+    if (Math.max.apply(null, all) < 0.05) t = '<strong>Golveffekt.</strong> Ingen ruta har nämnvärd risk, så en interaktion kan inte synas.';
+    else if (Math.min.apply(null, all) > 0.95) t = '<strong>Takeffekt.</strong> Alla rutor ligger nära 100 procent, så en interaktion kan inte synas.';
+    else if (I > 2) t = '<strong>Superadditivt.</strong> Den gemensamma rutan ligger ' + I.toFixed(0) + ' procentenheter över vad de enskilda tilläggen ger tillsammans.';
+    else if (I < -2) t = '<strong>Subadditivt.</strong> Den gemensamma rutan ligger ' + Math.abs(I).toFixed(0) + ' procentenheter under summan av tilläggen.' + (Math.max.apply(null, all) > 0.95 ? ' Det beror på taket: en ruta nära 100 % kan inte öka mer.' : '');
+    else t = '<strong>Ungefär additivt.</strong> Skillnaden från summan är under två procentenheter.';
+    document.getElementById('verdict').innerHTML = t;
+    renderPop(p00, p10, p01, p11);
+    document.getElementById('detail').textContent = 'Tillägg över låg/låg: frekvens ' + sgn((p10 - p00) * 100) + ', kostnad ' + sgn((p01 - p00) * 100) + ', tillsammans ' + sgn((p11 - p00) * 100) + ' procentenheter. Om de bara lades ihop vore det ' + sgn(add) + '. Interaktion = p11 \u2212 p10 \u2212 p01 + p00 = ' + sgn(I) + ' procentenheter. Utfallet är att INTE bli klar i tid.';
+  }
+  function renderPop(p00, p10, p01, p11) {
+    var q = v('q') / 100, f0 = (1 - q) * p00 + q * p01, f1 = (1 - q) * p10 + q * p11;
+    function r(a, b, c) { return '<tr><td>' + a + '</td><td>' + pct(b[0]) + '</td><td>' + pct(b[1]) + '</td><td>' + sgn((b[1] - b[0]) * 100) + ' procentenheter</td></tr>'; }
+    document.querySelector('#pop tbody').innerHTML =
+      r('Låg kostnad (' + (100 - v('q')) + ' %)', [p00, p10]) +
+      r('Hög kostnad (' + v('q') + ' %)', [p01, p11]) +
+      r('<strong>Hela gruppen, medelvärde</strong>', [f0, f1]);
+    var avg = (f1 - f0) * 100, sub = (p11 - p01) * 100, t;
+    if (v('q') === 0) t = 'Ingen har hög kostnad här, så medelvärdet är samma som den första raden.';
+    else if (avg < 5 && sub >= 20) t = '<strong>Medelvärdet döljer effekten.</strong> För gruppen som helhet ökar risken med ' + avg.toFixed(0) + ' procentenheter vid hög frekvens, men för undergruppen med hög kostnad ökar den med ' + sub.toFixed(0) + '.';
+    else t = 'För gruppen som helhet ökar risken med ' + avg.toFixed(0) + ' procentenheter vid hög frekvens. För undergruppen med hög kostnad är ökningen ' + sub.toFixed(0) + ' och för resten ' + ((p10 - p00) * 100).toFixed(0) + '.';
+    document.getElementById('popverdict').innerHTML = t;
+  }
+  function run(keepSel) {
+    ids.forEach(function (i) { document.getElementById('o_' + i).textContent = v(i); });
+    if (!keepSel) sel = null;
+    compute(); draw(); readout();
+  }
+  function pick(ev) {
+    var r = cv.getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top;
+    var pw = r.width - M.l - M.r, ph = r.height - M.t - M.b;
+    var i = Math.floor((x - M.l) / (pw / GX)), j = GY - 1 - Math.floor((y - M.t) / (ph / GY));
+    if (i < 1 || j < 1 || i >= GX || j >= GY) return;
+    sel = { i: i, j: j }; draw(); readout();
+  }
+  cv.addEventListener('click', pick);
+  cv.addEventListener('keydown', function (e) {
+    var d = { ArrowRight: [1,0], ArrowLeft: [-1,0], ArrowUp: [0,1], ArrowDown: [0,-1] }[e.key];
+    if (!d) return; e.preventDefault();
+    sel.i = Math.max(1, Math.min(GX - 1, sel.i + d[0])); sel.j = Math.max(1, Math.min(GY - 1, sel.j + d[1])); draw(); readout();
+  });
+  var presets = {
+    std:   { fl:1, cl:3, W:120, L:300, m:0, q:10 },
+    floor: { fl:1, cl:3, W:60,  L:480, m:0, q:10 },
+    ceil:  { fl:2, cl:5, W:200, L:240, m:0, q:10 },
+    thr:   { fl:1, cl:3, W:120, L:240, m:20, q:10 }
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('[data-p]'), function (b) {
+    b.addEventListener('click', function () { var p = presets[b.getAttribute('data-p')]; ids.forEach(function (i) { el[i].value = p[i]; }); run(false); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-mode]'), function (b) {
+    b.addEventListener('click', function () {
+      mode = b.getAttribute('data-mode');
+      Array.prototype.forEach.call(document.querySelectorAll('[data-mode]'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      draw(); readout();
+    });
+  });
+  var timer;
+  ids.forEach(function (i) { el[i].addEventListener('input', function () { document.getElementById('o_' + i).textContent = v(i); clearTimeout(timer); timer = setTimeout(function () { run(true); }, 120); }); });
+  window.addEventListener('resize', function () { if (grid) draw(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (grid) draw(); });
+  run(false);
+})();
+</script>
 </body>
 </html>
