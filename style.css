@@ -142,9 +142,9 @@ h1 .mark { height: 1.6em; vertical-align: -0.35em; }
 h1 { font-size: 1.5rem; }
 h1 .mark { height: 1.1em; vertical-align: -0.15em; margin-left: 0.4em; }
 
-/* Always black, white text */
-:root, :root:not([data-theme="light"]) { --bg: #000000; --fg: #ffffff; --muted: #94a9aa; color-scheme: dark; }
-html, body { background: #000; color: #fff; }
+/* Light paper background, dark text (test). The old black version is kept in style_dark_backup.css */
+:root, :root:not([data-theme="light"]) { --bg: #fbf9f4; --fg: #1b1b1b; --muted: #5a6b6c; color-scheme: light; }
+html, body { background: var(--bg); color: var(--fg); }
 
 /* Larger name and tagline (1.5x), octahedron before the tagline */
 h1 { font-size: 2.25rem; margin-bottom: 10px; }
@@ -172,3 +172,22 @@ nav { font-size: 1.1rem; }
 /* crystal strip */
 .crystals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:28px 0 0;max-width:520px}
 .crystals img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+
+/* Start page: smaller text, octahedron scaled to match */
+.home h1 { font-size: 1.75rem; }
+.home .tagline { font-size: 0.97rem; }
+.home nav { font-size: 0.85rem; }
+.home .tagrow canvas { width: 4.1rem; height: 4.1rem; }
+.home .feed h2 { font-size: 0.75rem; }
+.home .feed li { font-size: 0.8rem; }
+.home .feed time, .home .feed .v { font-size: 0.7rem; }
+@media (max-width: 680px) {
+  .home h1 { font-size: 1.3rem; }
+  .home .tagline { font-size: 0.82rem; }
+  .home nav { font-size: 0.8rem; }
+  .home .tagrow canvas { width: 3.1rem; height: 3.1rem; }
+  .home .feed li { font-size: 0.78rem; }
+}
+
+.refs { list-style: none; padding-left: 0; font-size: .92em; }
+.refs li { margin: 0 0 8px; padding-left: 1.6em; text-indent: -1.6em; overflow-wrap: anywhere; }
