@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,500;0,700;1,400&family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<title>Blockerare och frisättare i prefrontala cortex · Martina Johansson</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<main class="page prose">
+  <a class="back" href="../">&larr; Models &amp; hypotheses</a>
+  <h1>Blockerare och frisättare i prefrontala cortex</h1>
+  <p class="tagline">Varför kan två läkemedel som båda höjer dopamin ge olika effekt på tänkandet hos samma person? Det här är en fråga jag försöker göra prövbar.</p>
+  <p class="meta" style="margin-top:14px"><span class="status">hypotes</span> &middot; neurokemi &middot; v0.2 &middot; 2026-11-23 &middot; omarbetad efter litteraturgenomgång &middot; inte prövad</p>
+
+  <h2>Det som väcker min nyfikenhet</h2>
+  <p>Läkemedel som höjer dopaminnivån brukar beskrivas som att de &rdquo;ger mer dopamin&rdquo;. Men i praktiken verkar olika typer ge olika resultat: en grupp hämmar återupptaget av transmittorn (blockerare), en annan får nervcellerna att frisätta den (frisättare). Samma person kan reagera olika på de två, och jag undrar vad skillnaden består i, särskilt i prefrontala cortex, där arbetsminne och planering sitter.</p>
+
+  <h2>Hur jag har undersökt det</h2>
+  <p>Jag formulerade först en detaljerad mekanism i samtal med en AI: att ett magnesiumblock i NMDA-receptorn hävs av en D1-driven depolarisering, och att bara blockerare kan åstadkomma det hos personer med snabb dopaminnedbrytning. Sedan gick jag igenom litteraturen och hittade fyra problem med den:</p>
+  <ul>
+    <li>Dopamin städas i prefrontala cortex främst av noradrenalintransportören och COMT, inte av dopamintransportören. En &rdquo;ren&rdquo; blockad av dopamintransportören borde därför ha liten direkt effekt där.</li>
+    <li>De vanliga läkemedlen är inte rena: båda grupperna påverkar både dopamin- och noradrenalintransportören.</li>
+    <li>I en studie förbättrade en frisättare prefrontal effektivitet hos de med snabb nedbrytning (COMT Val/Val), vilket är motsatsen till vad den första versionen förutsade.</li>
+    <li>Vägen via PKA och DARPP-32 stämde inte i en studie av prefrontala neuron, där D1-effekten på NMDA-strömmen var PKA-oberoende.</li>
+  </ul>
+  <p>Därför har jag skrivit om hypotesen så att den säger mindre, men går att pröva.</p>
+
+  <h2>Vad jag har kommit fram till</h2>
+  <p><strong>Hypotesen.</strong> Skillnader mellan blockerare och frisättare kan bero på vilka transportörer de verkar på, i vilken hjärnregion, och på om de bevarar eller suddar ut den impulsstyrda (fasiska) dopaminsignalen. Två läkemedel som ger samma extracellulära dopaminnivå i prefrontala cortex kan därför ge olika signal.</p>
+  <p><strong>Villkor.</strong> Hypotesen gäller personer med låg prefrontal dopaminnivå i utgångsläget och försämrad NMDA-signalering. Effekten förväntas bero på utgångsläget, i linje med en omvänd U-kurva.</p>
+
+  <h3>Delpåståenden och vad som stöder dem</h3>
+  <div class="scroll" tabindex="0" role="region" aria-label="Delpåståenden, kan rullas i sidled">
+    <table>
+      <thead><tr><th>Påstående</th><th>Status</th><th>Källa och hur jag kontrollerat</th></tr></thead>
+      <tbody>
+        <tr><td>1. Dopamin städas i PFC främst via NET och COMT.</td><td>Stödd</td><td><a href="https://www.frontiersin.org/articles/10.3389/fphar.2020.588160/pdf">Devoto m.fl. 2020</a>, Frontiers in Pharmacology, en översikt som hänvisar till Sesack 1998 för låg DAT-täthet. Översikten är läst i sammanfattning.</td></tr>
+        <tr><td>2. Läkemedlen skiljer sig i extracellulärt mot synaptiskt dopamin.</td><td>Stödd, i striatum</td><td><a href="https://scholars.mssm.edu/en/publications/therapeutic-doses-of-amphetamine-or-methylphenidate-differentiall-2/">Schiffer m.fl. 2006</a>, Synapse 59:243. Extracellulärt dopamin höjdes cirka fyra gånger mer av amfetamin, synaptiskt var likartat. Abstract läst.</td></tr>
+        <tr><td>3. Vid samma extracellulära nivå skiljer sig den fasiska signalen i PFC.</td><td>Antagande</td><td>Inget prövat som jag hittat.</td></tr>
+        <tr><td>4. D1 ökar NMDA-strömmar i PFC.</td><td>Stödd</td><td><a href="https://data.zhenzhi.com/details/1/865321751">Chen, Greengard och Yan</a>, prefrontala neuron. Året står inte på sidan. Sammanfattning läst.</td></tr>
+        <tr><td>5. Vägen går via Mg&sup2;&#8314;-upplåsning och inte via PKA.</td><td>Öppet</td><td>Samma studie fann PKA-oberoende och beroende av kalcium/kalmodulin och PKC. Mg&sup2;&#8314;-spärren behandlades inte.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="figure">
+<div class="scroll" tabindex="0" role="region" aria-label="Mekanismdiagram, kan rullas i sidled">
+<svg viewBox="0 0 670 866" role="img" aria-labelledby="b_t b_d" style="display:block;width:100%;max-width:670px;height:auto" xmlns="http://www.w3.org/2000/svg"><title id="b_t">Hypotesen om blockerare och frisättare</title><desc id="b_d">Blockerare och frisättare verkar på transportörer och ger samma extracellulära nivå av dopamin men enligt hypotesen olika fasisk signal i prefrontala cortex. Det ger olika arbetsminnesprestanda hos personer med låg utgångsnivå, enligt en omvänd U-kurva. Länken till samma nivå är stödd i striatum och länken till olika fasisk signal är ett antagande som inte prövats. Konkurrerande förklaringar är noradrenalinets del och utgångsnivån.</desc><defs>
+<filter id="b_soft" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2"/></filter>
+<marker id="b_mi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1b1b1b"/></marker>
+<marker id="b_mm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5a6b6c"/></marker>
+<style>
+.ti{font-family:var(--font-name);font-size:13.5px;font-weight:700;fill:#1b1b1b}
+.su{font-family:var(--font-body);font-size:14.5px;fill:#1b1b1b}
+.it{font-style:italic}
+.w{fill:#fff !important}
+.s2{font-family:var(--font-name);font-size:10.5px;fill:#5a6b6c}
+.lb{font-family:var(--font-name);font-size:11px;letter-spacing:.06em;fill:#5a6b6c}
+.lk{font-family:var(--font-body);font-size:13.5px;fill:#3d4b4c}
+.st{font-family:var(--font-name);font-size:10.5px;fill:#3d4b4c;paint-order:stroke;stroke:#fbf9f4;stroke-width:4px;stroke-linejoin:round}
+</style>
+</defs><g filter="url(#b_soft)"><rect x="22" y="38" width="176" height="84" rx="6" fill="#fbf9f4" stroke="#1b1b1b" stroke-width="1.6"/></g><text x="110" y="76.0" text-anchor="middle" class="ti">Blockerare</text><text x="110" y="94.0" text-anchor="middle" class="su">hämmar återupptaget</text><g filter="url(#b_soft)"><rect x="472" y="38" width="176" height="84" rx="6" fill="#fbf9f4" stroke="#1b1b1b" stroke-width="1.6"/></g><text x="560" y="76.0" text-anchor="middle" class="ti">Frisättare</text><text x="560" y="94.0" text-anchor="middle" class="su">frisätter transmittorn</text><g filter="url(#b_soft)"><rect x="185" y="179" width="300" height="92" rx="6" fill="#fbf9f4" stroke="#1b1b1b" stroke-width="1.6"/></g><text x="335" y="221.0" text-anchor="middle" class="ti">Samma extracellulära nivå</text><text x="335" y="239.0" text-anchor="middle" class="su">av dopamin och noradrenalin</text><path d="M110,124 C115,160 170,170 200,178" fill="none" stroke="#1b1b1b" stroke-width="1.6" stroke-linecap="round" marker-end="url(#b_mi)"/><path d="M560,124 C555,160 500,170 470,178" fill="none" stroke="#1b1b1b" stroke-width="1.6" stroke-linecap="round" marker-end="url(#b_mi)"/><text x="335" y="148" text-anchor="middle" class="lk">olika verkan på transportörer</text><path d="M335,273 C335,300 335,318 335,340" fill="none" stroke="#1b1b1b" stroke-width="1.6" stroke-linecap="round" marker-end="url(#b_mi)"/><text x="347" y="318" text-anchor="start" class="st">stödd, i striatum</text><g filter="url(#b_soft)"><rect x="179" y="342" width="312" height="80" rx="6" fill="#fbf9f4" stroke="#1b1b1b" stroke-width="1.6" stroke-dasharray="6 4"/></g><text x="335" y="378.0" text-anchor="middle" class="ti">Olika fasisk signal i PFC</text><text x="335" y="396.0" text-anchor="middle" class="su">bevarad eller utsuddad</text><path d="M335,424 C335,450 335,462 335,476" fill="none" stroke="#1b1b1b" stroke-width="1.6" stroke-linecap="round" marker-end="url(#b_mi)"/><text x="347" y="458" text-anchor="start" class="st">antagande, inte prövat</text><rect x="195" y="496" width="110" height="130" fill="#e4e0d6" fill-opacity=".8"/><path d="M175,636 L175,494 M175,636 L515,636" stroke="#1b1b1b" stroke-width="1.4" fill="none"/><path d="M195,631 C255,486 425,486 495,631" fill="none" stroke="#1b1b1b" stroke-width="2.4" stroke-linecap="round"/><text x="250" y="516" text-anchor="middle" class="st">hypotesen gäller här</text><text x="345" y="658" text-anchor="middle" class="lk">utgångsnivå av dopamin i PFC</text><text x="160" y="565" text-anchor="middle" class="lk" transform="rotate(-90 160 565)">arbetsminne</text><text x="522" y="560" text-anchor="start" class="st">schematisk omvänd</text><text x="522" y="575" text-anchor="start" class="st">U-kurva (Cools och</text><text x="522" y="590" text-anchor="start" class="st">D’Esposito 2011)</text><text x="24" y="700" text-anchor="start" class="lb">KONKURRERANDE FÖRKLARINGAR</text><g filter="url(#b_soft)"><rect x="30" y="720" width="280" height="100" rx="6" fill="#b3361f" stroke="#1b1b1b" stroke-width="1.6"/></g><text x="170" y="757.5" text-anchor="middle" class="ti w">Noradrenalinets del</text><text x="170" y="775.5" text-anchor="middle" class="su w">båda hämmar NET, som städar</text><text x="170" y="792.5" text-anchor="middle" class="su w">dopamin i prefrontala cortex</text><g filter="url(#b_soft)"><rect x="360" y="720" width="280" height="100" rx="6" fill="#b3361f" stroke="#1b1b1b" stroke-width="1.6"/></g><text x="500" y="757.5" text-anchor="middle" class="ti w">Utgångsnivån</text><text x="500" y="775.5" text-anchor="middle" class="su w">effekten beror på startläget,</text><text x="500" y="792.5" text-anchor="middle" class="su w">inte på läkemedlet</text><path d="M215,718 C205,690 205,664 215,644" fill="none" stroke="#5a6b6c" stroke-width="1.6" stroke-dasharray="2 5" stroke-linecap="round"/><path d="M455,718 C465,690 480,664 490,644" fill="none" stroke="#5a6b6c" stroke-width="1.6" stroke-dasharray="2 5" stroke-linecap="round"/><path d="M14,846 L40,846" fill="none" stroke="#1b1b1b" stroke-width="1.6" stroke-linecap="round" marker-end="url(#b_mi)"/><text x="48" y="850" class="lk">påverkar</text><path d="M121.2,846 L147.2,846" fill="none" stroke="#5a6b6c" stroke-width="1.6" stroke-dasharray="2 5" stroke-linecap="round"/><text x="155.2" y="850" class="lk">samband</text><rect x="222.0" y="839" width="24" height="14" rx="5" fill="#f1eee6" stroke="#1b1b1b" stroke-width="1.3" stroke-dasharray="4 3"/><text x="254.0" y="850" class="lk">dold, inte direkt observerbar</text><rect x="461.6" y="839" width="24" height="14" rx="5" fill="#b3361f" stroke="#1b1b1b" stroke-width="1.3"/><text x="493.6" y="850" class="lk">konkurrerande förklaring</text></svg>
+    </div>
+    <figcaption>Figur 1. Hypotesens kedja från läkemedel till arbetsminnesprestanda. Texten på pilarna är den status delpåståendena har i tabellen. Rosa former är konkurrerande förklaringar. Kurvan är schematisk och visar inga data.</figcaption>
+  </figure>
+
+  <h3>Förutsägelser</h3>
+  <ol>
+    <li>Jämfört vid <em>matchad</em> extracellulär nivå av dopamin och noradrenalin ger blockerare och frisättare olika fasiska transienter i PFC (mätt med voltammetri) och olika arbetsminnesprestanda hos djur med låg utgångsnivå.</li>
+    <li>Effekten av D1-aktivering på NMDA-ström hävs av hämning av PKC eller kalmodulin, inte av PKA-hämning.</li>
+  </ol>
+  <p><strong>Hypotesen förkastas om</strong> inga skillnader i fasisk signal ses vid matchade nivåer, eller om Mg&sup2;&#8314;-känsligheten inte förändras av D1-aktivering.</p>
+
+  <h2>Vad som talar emot</h2>
+  <div class="scroll" tabindex="0" role="region" aria-label="Motbelägg, kan rullas i sidled">
+    <table>
+      <thead><tr><th>Arbete</th><th>Vad det visar</th><th>Betydelse</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://scholars.duke.edu/publication/746809">Mattay m.fl. 2003</a>, PNAS 100:6186</td><td>Amfetamin förbättrade prefrontal effektivitet hos Val/Val vid alla belastningsnivåer. Hos Met/Met försämrades arbetsminnet vid hög belastning.</td><td>Motsäger &rdquo;frisättare fallerar hos Val/Val&rdquo; som allmän regel. Friska deltagare, annan uppgift. Abstract läst.</td></tr>
+        <tr><td><a href="https://pubmed.ncbi.nlm.nih.gov/29428394/">Faraone 2018</a></td><td>Båda grupperna hämmar både dopamin- och noradrenalintransportören. Amfetamin hämmar dessutom VMAT-2 och MAO, metylfenidat är agonist vid 5-HT1A.</td><td>Kategorin &rdquo;ren blockerare&rdquo; stämmer inte för de vanliga läkemedlen. Abstract läst.</td></tr>
+        <tr><td><a href="https://scienceopen.com/document/vid/00606d3d-3e09-49ea-9b63-9adb2101e28b">Cools och D&rsquo;Esposito 2011</a>, Biol Psychiatry 69:e113</td><td>Dopamineffekter följer en omvänd U-kurva och beror på utgångsnivån.</td><td>Står mot en binär tröskel. Sammanfattning läst.</td></tr>
+        <tr><td><a href="https://www.jsr.org/hs/index.php/path/article/view/3087">Maheshwari och Wolfe 2021</a></td><td>Val/Val hade 1,86 gånger större chans att svara på metylfenidat. Heterogena studier, uteblivna replikationer.</td><td>Svagt stöd för kopplingen COMT och stimulanssvar. Publicerad i en tidskrift för elevarbeten.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Vad som är borttaget från första utkastet</h2>
+  <ul>
+    <li>Att tröskeln skulle vara <em>binär</em>.</li>
+    <li>Vägen via cAMP, PKA och DARPP-32 som säker mekanism.</li>
+    <li>&rdquo;Ren DAT-blockad&rdquo; som en kategori, och att den skulle skydda mot psykos.</li>
+    <li>Att frisättare generellt fallerar hos snabb nedbrytning.</li>
+    <li>Orden &rdquo;unik&rdquo; och &rdquo;strikt falsifierbar&rdquo;, som saknade underlag.</li>
+  </ul>
+
+  <h2>Gränser och öppna frågor</h2>
+  <ul>
+    <li><strong>Novitet.</strong> Jag har inte hittat en text som formulerar just den här skillnaden, men sökningen är kort och inte systematisk.</li>
+    <li><strong>Ej läst.</strong> En kritisk översikt om hur COMT Val158Met modererar dopaminerga läkemedel (Nature, Pharmacogenomics J 2016) och en PET-studie om COMT och amfetamininducerad kortikal dopaminfrisättning fanns bland träffarna, men jag kunde inte läsa dem. De bör läsas innan sidan ändras.</li>
+    <li><strong>Frågan om psykos.</strong> Jag har tagit bort alla påståenden om psykos och säkerhet. Sidan är en forskningshypotes och säger ingenting om behandling.</li>
+    <li><strong>Mätbarhet.</strong> Förutsägelserna kräver djurmodeller eller elektrofysiologi. Jag kan inte genomföra dem själv, och sidan är en inbjudan till granskning.</li>
+  </ul>
+
+  <h2>Hur sidan kom till</h2>
+  <p>Frågan och iakttagelsen bakom den är mina. Mekanismen utvecklades i samtal med en AI, och en del av de specifika antagandena kom därifrån. Jag har granskat den mot litteraturen och skrivit om den. Hur långt varje källa är kontrollerad står i tabellerna.</p>
+
+  <h2>Versionshistorik</h2>
+  <div class="scroll" tabindex="0" role="region" aria-label="Versionshistorik">
+    <table>
+      <thead><tr><th>Version</th><th>Datum</th><th>Ändring</th></tr></thead>
+      <tbody>
+        <tr><td>v0.2</td><td>2026-11-23</td><td>Sidan återinförd under Models &amp; hypotheses. Innehållet oförändrat från v0.1.</td></tr>
+        <tr><td>v0.1</td><td>2026-11-12</td><td>Första version, omarbetad efter litteraturgenomgång: fyra problem identifierade, mekanismen smalnad, delpåståenden och förutsägelser märkta efter underlag.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>
